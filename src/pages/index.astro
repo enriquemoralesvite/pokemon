@@ -1,11 +1,26 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+const API_URL = 'https://pokeapi.co/api/v2/pokemon?limit=151';
+const response = await fetch(API_URL);
+const data = await response.json();
+const promises = data.results.map(async (pokemon: { url: string }) => {
+	const res = await fetch(pokemon.url);
+	const info = await res.json();
+	return {
+		name: info.name,
+		image: info.sprites.other['official-artwork'].front_default,
+		types: info.types.map((t: { type: { name: string } }) => t.type.name)
+	};
+});
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const pokemons = await Promise.all(promises);
 ---
 
 <Layout>
-	<Welcome />
+	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+		{pokemons.map(pokemon => (
+			<Card pokemon={pokemon} />
+		))}
+	</div>
 </Layout>

@@ -1,0 +1,8 @@
+---
+const { pokemon } = Astro.props;
+---
+
+<a href={`/pokemon/${pokemon.name}`}>
+    <img src={pokemon.image} alt={pokemon.name} />
+    <h2>{pokemon.name}</h2>
+</a>
