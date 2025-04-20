@@ -2,7 +2,16 @@
 const { pokemon } = Astro.props;
 ---
 
-<a href={`/pokemon/${pokemon.name}`}>
-    <img src={pokemon.image} alt={pokemon.name} />
-    <h2>{pokemon.name}</h2>
+<a href={`/pokemon/${pokemon.name}`}
+    class="bg-gray-700 rounded-xl shadow hover:scale-105 transition p-4 flex flex-col items-center">
+    <img src={pokemon.image} alt={pokemon.name} class="w-24 h-24 mb-4"/>
+    <h2 class="text-lg font-bold capitalize">{pokemon.name}</h2>
+
+    <div class="flex gap-2 mt-2">
+        {pokemon.types.map((type: string) => (
+        
+            <span class="text-xs bg-yellow-400 text-gray-900 px-2 py-1 rounded-full">{type}</span>
+        ))}
+
+    </div>
 </a>
