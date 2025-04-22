@@ -49,5 +49,5 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 
 ## You can check my app through the following link
 
-[Pokemon](https://dragonball-enrique.vercel.app/)
+[Pokemon](https://pokenrique.vercel.app/)
 
